@@ -1,23 +1,27 @@
 // App.js
 import './App.css';
-import Cart from './Components/Cart';
+import Viewcart from './Components/Viewcart';
 import Home from './Components/Home';
 import  Navbar  from "./Components/Navbar";
 import { BrowserRouter, Route,Routes } from 'react-router-dom';
-import {useState} from "react"
+import {useState,createContext} from "react"
+
+export const cartContext=createContext();
 
 function App() {
   const[cart,setcart]=useState([])
   return (
-    <BrowserRouter>
+    <cartContext.Provider value={{cart,setcart}}>
+      <BrowserRouter>
       <Navbar cart={cart}/>
      <div className='container'>
       <Routes>
-      <Route path="/" element={<Home cart={cart}setcart={setcart}/>}></Route>
-      <Route path="/Cart" element={<Cart cart={cart}setcart={setcart}/>}></Route>
+      <Route path="/" element={<Home />}></Route>
+      <Route path="/Cart" element={<Viewcart />}></Route>
       </Routes>
      </div>
     </BrowserRouter>
+    </cartContext.Provider>
   );
 }
 

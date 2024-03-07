@@ -1,7 +1,12 @@
 // Product.jsx
 import React from 'react';
 import "./Product.css"
-const Product = ({product,cart,setcart}) => {
+import { useContext } from 'react';
+import { cartContext } from '../App';
+
+const Product = ({product}) => {
+
+  const {cart,setcart}=useContext(cartContext)
    const name=product.name.length>21?product.name.substring(0,20)+"..":product.name;
 
    const addcart=()=>{
